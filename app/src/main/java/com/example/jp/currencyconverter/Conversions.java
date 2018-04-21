@@ -1,13 +1,7 @@
 package com.example.jp.currencyconverter;
 
 public class Conversions {
-
-
-
-
-
-
-    public static double convertDolar(double toBarState, double amount){
+    public static double convertDollar(final double toBarState,  final double amount){
         double dollarToEuro = 0.81;
         double dolarToReal = 3.42;
 
@@ -25,7 +19,7 @@ public class Conversions {
 
     }
 
-    public static double convertEuro(double toBarState, double amount){
+    public static double convertEuro(final double toBarState, final double amount){
         double euroToDollar = 1.23;
         double euroToReal = 4.21;
 
@@ -42,7 +36,7 @@ public class Conversions {
         return 0;
     }
 
-    public static double convertReal(double toBarState, double amount){
+    public static double convertReal(final double toBarState, final double amount){
         double realToDollar = 0.29;
         double realToEuro = 0.24;
 

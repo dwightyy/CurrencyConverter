@@ -1,15 +1,16 @@
 package com.example.jp.currencyconverter;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import java.util.Currency;
-import java.util.Set;
+import android.widget.Toast;
 
 import org.honorato.multistatetogglebutton.MultiStateToggleButton;
+import org.honorato.multistatetogglebutton.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     MultiStateToggleButton fromBar;
     MultiStateToggleButton toBar;
+
+    int toCheck;
+    int fromCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 short[] state = Bars.getState(fromBar, toBar);
+                if(state[0] == state[1]){
+                    Context context = getApplicationContext();
+                    Toast sameCurrency = Toast.makeText(context,"The currency can't be the same",Toast.LENGTH_SHORT );
+                    sameCurrency.show();
+
+                }
                 double amount = Double.parseDouble(amount_field.getText().toString().trim());
                 double result = Bars.doConversion(state, amount);
-                converted_field.setText(String.valueOf(result));
+                if(result != 0){
+                    converted_field.setText(String.valueOf(result));
+                }
+                if(result == 0){
+                    converted_field.setText(" ");
+                }
+
 
             }
         });

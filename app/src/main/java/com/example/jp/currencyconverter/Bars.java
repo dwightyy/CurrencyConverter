@@ -1,9 +1,6 @@
 package com.example.jp.currencyconverter;
 
-import android.util.Log;
-
 import org.honorato.multistatetogglebutton.MultiStateToggleButton;
-import org.honorato.multistatetogglebutton.ToggleButton;
 
 public class Bars {
 
@@ -44,7 +41,7 @@ public class Bars {
         }
 
         if (fromBarState == 0){
-            return Conversions.convertDolar(toBarState, amount);
+            return Conversions.convertDollar(toBarState, amount);
         }
         else if(fromBarState == 1) {
             return Conversions.convertEuro(toBarState, amount);
