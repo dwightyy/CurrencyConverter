@@ -2,10 +2,14 @@
     <string name="app_name">CurrencyConverter</string>
     <string name="amount">Amount</string>
     <string name="converted">Converted</string>
+    <string name="go">GO</string>
 
     <string-array name="currencies">
         <item>$</item>
         <item>€</item>
         <item>R$</item>
     </string-array>
+
+
+
 </resources>

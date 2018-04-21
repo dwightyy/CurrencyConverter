@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <org.honorato.multistatetogglebutton.MultiStateToggleButton
-        android:id="@+id/mstb_bar_1"
+        android:id="@+id/fromBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -22,7 +22,7 @@
         mstb:values="@array/currencies" />
 
     <org.honorato.multistatetogglebutton.MultiStateToggleButton
-        android:id="@+id/mstb_bar_2"
+        android:id="@+id/toBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -32,14 +32,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mstb_bar_1"
+        app:layout_constraintTop_toBottomOf="@+id/fromBar"
         app:layout_constraintVertical_bias="0.033"
         mstb:mstbPrimaryColor="@color/gray"
         mstb:mstbSecondaryColor="@color/blue"
         mstb:values="@array/currencies" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/field_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -50,20 +50,36 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mstb_bar_2" />
+        app:layout_constraintTop_toBottomOf="@+id/toBar" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/field_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="108dp"
         android:ems="10"
         android:hint="@string/converted"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/field_1" />
+
+    <Button
+        android:id="@+id/goButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/go"
+        app:layout_constraintBottom_toTopOf="@+id/field_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/field_1"
+        tools:text="GO" />
 
 </android.support.constraint.ConstraintLayout>
