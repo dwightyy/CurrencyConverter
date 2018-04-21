@@ -31,21 +31,28 @@ public class Bars {
     }
 
     protected static double doConversion(short[] state, double amount){
-        double euroXreal = 4.20;
-        double dolarXreal = 3.41;
         //TODO change "state[n]" to variable to have better
         //TODO refactor so dont have as many ifs.
-        if(state[0] == 2){
-            if (state[1] == 0){
-                return amount * dolarXreal ;
-            }
-            else if(state[1] == 1){
-                return amount * euroXreal;
-            }
-            else if(state[1] == 2){
-                return 0;
-            }
+        //TODO handle from when go is pressed without "to" value selected
+        //CHECK IF TO IS EQUAL FROM ONLY ONE TIME
+        double fromBarState = state[0];
+        double toBarState = state[1];
+
+
+        if(toBarState == fromBarState){
+            return 0;
         }
+
+        if (fromBarState == 0){
+            return Conversions.convertDolar(toBarState, amount);
+        }
+        else if(fromBarState == 1) {
+            return Conversions.convertEuro(toBarState, amount);
+        }
+        else if(fromBarState == 2){
+            return Conversions.convertReal(toBarState, amount);
+        }
+
         return 0;
     }
 
