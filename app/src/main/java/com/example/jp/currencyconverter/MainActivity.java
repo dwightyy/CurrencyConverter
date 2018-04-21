@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 short[] state = Bars.getState(fromBar, toBar);
                 if(state[0] == state[1]){
                     Context context = getApplicationContext();
+                    //TODO make so the user cant select the same currency in the first place.
+                    //TODO make the toBar have only two values depending on the fromValue selected using the setElements.
                     Toast sameCurrency = Toast.makeText(context,"The currency can't be the same",Toast.LENGTH_SHORT );
                     sameCurrency.show();
 
