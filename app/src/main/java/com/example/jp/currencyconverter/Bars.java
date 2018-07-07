@@ -1,9 +1,11 @@
 package com.example.jp.currencyconverter;
 
 import org.honorato.multistatetogglebutton.MultiStateToggleButton;
+import android.util.Log;
+
+
 
 public class Bars {
-
     protected static short[] getState(MultiStateToggleButton fromBar, MultiStateToggleButton toBar){
         boolean[] fromStates = fromBar.getStates();
         boolean[] toStates = toBar.getStates();
@@ -29,7 +31,7 @@ public class Bars {
 
     protected static double doConversion(short[] state, double amount){
         //TODO change "state[n]" to variable to have better
-        //TODO refactor so dont have as many ifs.
+        //TODO refactor so don't have as many ifs.
         //TODO handle from when go is pressed without "to" value selected
         //CHECK IF TO IS EQUAL FROM ONLY ONE TIME
         double fromBarState = state[0];
@@ -41,13 +43,16 @@ public class Bars {
         }
 
         if (fromBarState == 0){
-            return Conversions.convertDollar(toBarState, amount);
+           return Conversions.convertDollar(toBarState, amount);
+
         }
         else if(fromBarState == 1) {
             return Conversions.convertEuro(toBarState, amount);
+
         }
         else if(fromBarState == 2){
             return Conversions.convertReal(toBarState, amount);
+
         }
 
         return 0;

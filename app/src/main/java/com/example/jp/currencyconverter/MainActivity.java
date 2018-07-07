@@ -3,6 +3,8 @@ package com.example.jp.currencyconverter;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,10 @@ import android.widget.Toast;
 
 import org.honorato.multistatetogglebutton.MultiStateToggleButton;
 import org.honorato.multistatetogglebutton.ToggleButton;
+
+import java.text.NumberFormat;
+import java.util.Currency;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,36 +39,119 @@ public class MainActivity extends AppCompatActivity {
 
         amount_field = findViewById(R.id.field_1);
         converted_field = findViewById(R.id.field_2);
-        goButton = findViewById(R.id.goButton);
+/*        goButton = findViewById(R.id.goButton);*/
         fromBar = findViewById(R.id.fromBar);
         toBar = findViewById(R.id.toBar);
+                    //TODO make so the user cant select the same currency in the first place.
+                    //TODO make the toBar have only two values depending on the fromValue selected using the setElements.
 
-        goButton.setOnClickListener(new View.OnClickListener() {
+
+        amount_field.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                short[] state = Bars.getState(fromBar, toBar);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                final short[] state = Bars.getState(fromBar, toBar);
                 if(state[0] == state[1]){
                     Context context = getApplicationContext();
                     //TODO make so the user cant select the same currency in the first place.
                     //TODO make the toBar have only two values depending on the fromValue selected using the setElements.
                     Toast sameCurrency = Toast.makeText(context,"The currency can't be the same",Toast.LENGTH_SHORT );
                     sameCurrency.show();
+                    }
+                fromBar.setOnValueChangedListener(new ToggleButton.OnValueChangedListener(){
+                    @Override
+                    public void onValueChanged(int value) {
+                        short[] state = Bars.getState(fromBar, toBar);
+                        double toBarState = state[1];
+                        String result = "";
+                        double amount = Double.parseDouble(0 +amount_field.getText().toString().trim());
+                        double converted = Bars.doConversion(state, amount);
 
-                }
-                double amount = Double.parseDouble(amount_field.getText().toString().trim());
-                double result = Bars.doConversion(state, amount);
-                if(result != 0){
-                    converted_field.setText(String.valueOf(result));
-                }
-                if(result == 0){
-                    converted_field.setText(" ");
-                }
+                        if (toBarState == 0){
+                            result = formatUSD(converted);
 
+
+                        }else if(toBarState == 1){
+                            result = formatEUR(converted);
+
+                        }else if(toBarState == 2){
+                            result = formatBRL(converted);
+                        }
+                        setText(result);
+
+
+
+                    }
+
+
+                });
+
+                String result = " ";
+
+                double amount = Double.parseDouble(0 +amount_field.getText().toString().trim());
+                double converted = Bars.doConversion(state, amount);
+
+                double toBarState = state[1];
+
+                if (toBarState == 0){
+                    result = formatUSD(converted);
+
+
+                }else if(toBarState == 1){
+                    result = formatEUR(converted);
+
+                }else if(toBarState == 2){
+                    result = formatBRL(converted);
+                }
+                setText(result);
 
             }
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+
+
+            public void setText(String result){
+                if(result != null){
+                    converted_field.setText(String.valueOf(" "+result));
+                }
+                if(result == null){
+                    converted_field.setText(" ");
+                }
+            }
+
+            public String formatUSD(double converted){
+                NumberFormat FORMAT_USD = NumberFormat.getCurrencyInstance(Locale.getDefault());
+                FORMAT_USD.setCurrency(Currency.getInstance("USD"));
+
+                return FORMAT_USD.format(converted);
+
+            }
+            public String formatEUR(double converted){
+                NumberFormat FORMAT_EUR = NumberFormat.getCurrencyInstance(Locale.getDefault());
+                FORMAT_EUR.setCurrency(Currency.getInstance("EUR"));
+                return FORMAT_EUR.format(converted);
+            }
+            public String formatBRL(double converted){
+                NumberFormat FORMAT_BRL = NumberFormat.getCurrencyInstance(Locale.getDefault());
+                FORMAT_BRL.setCurrency(Currency.getInstance("BRL"));
+                return FORMAT_BRL.format(converted);
+            }
+
+
         });
+
+
+
+
+
+        }
+
     }
 
 
-
-}

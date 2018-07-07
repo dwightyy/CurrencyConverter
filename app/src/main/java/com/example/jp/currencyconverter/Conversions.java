@@ -45,6 +45,7 @@ public class Conversions {
 
         if(toBarState == dollar){
             return amount * realToDollar;
+
         }
         if(toBarState == euro){
             return amount * realToEuro;
