@@ -5,9 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,13 +19,11 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText amount_field;
     private EditText converted_field;
-    private Button goButton;
+
 
     MultiStateToggleButton fromBar;
     MultiStateToggleButton toBar;
 
-    int toCheck;
-    int fromCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                     Context context = getApplicationContext();
                     //TODO make so the user cant select the same currency in the first place.
                     //TODO make the toBar have only two values depending on the fromValue selected using the setElements.
+                    //TODO make everhing with methods so duplicated code doesn't occur. \
+                    //TODO make listener for toBar so converted amount refreshes as the currency is changed.
                     Toast sameCurrency = Toast.makeText(context,"The currency can't be the same",Toast.LENGTH_SHORT );
                     sameCurrency.show();
                     }
@@ -116,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            public void setText(String result){
+            private void setText(String result){
                 if(result != null){
                     converted_field.setText(String.valueOf(" "+result));
                 }
@@ -125,19 +122,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            public String formatUSD(double converted){
+            private String formatUSD(double converted){
                 NumberFormat FORMAT_USD = NumberFormat.getCurrencyInstance(Locale.getDefault());
                 FORMAT_USD.setCurrency(Currency.getInstance("USD"));
 
                 return FORMAT_USD.format(converted);
 
             }
-            public String formatEUR(double converted){
+            private String formatEUR(double converted){
                 NumberFormat FORMAT_EUR = NumberFormat.getCurrencyInstance(Locale.getDefault());
                 FORMAT_EUR.setCurrency(Currency.getInstance("EUR"));
                 return FORMAT_EUR.format(converted);
             }
-            public String formatBRL(double converted){
+            private String formatBRL(double converted){
                 NumberFormat FORMAT_BRL = NumberFormat.getCurrencyInstance(Locale.getDefault());
                 FORMAT_BRL.setCurrency(Currency.getInstance("BRL"));
                 return FORMAT_BRL.format(converted);

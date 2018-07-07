@@ -1,7 +1,6 @@
 package com.example.jp.currencyconverter;
 
 import org.honorato.multistatetogglebutton.MultiStateToggleButton;
-import android.util.Log;
 
 
 
@@ -13,19 +12,17 @@ public class Bars {
         short currentTo = 0;
 
         for(short i = 0; i < fromStates.length; i++){
-            if(fromStates[i] == true){
+            if(fromStates[i]){
                 currentFrom = i;
             }
         }
         for(short i = 0; i < toStates.length; i++){
-            if(toStates[i] == true){
+            if(toStates[i]){
                 currentTo = i;
             }
         }
 
-        short[] state = new short[]{currentFrom, currentTo};
-
-        return state;
+        return new short[]{currentFrom, currentTo};
 
     }
 
